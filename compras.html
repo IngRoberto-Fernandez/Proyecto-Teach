@@ -213,6 +213,7 @@
           carrito.push(evento.target.getAttribute('marcador'))
           // Actualizamos el carrito
           renderizarCarrito();
+          actualizarTotal();
           
 
             handleCarritoValue(carrito.length)
@@ -222,6 +223,20 @@
         const carritoContainer = document.getElementById("carrito-value");
         carritoContainer.textContent =  `${value}`
       }
+
+      function calcularTotal() {
+        return carrito.reduce((total, itemId) => {
+            const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                return itemBaseDatos.id === parseInt(itemId);
+            });
+            return total + miItem[0].precio;
+        }, 0);
+    }
+
+    // Función para actualizar el total en el DOM
+    function actualizarTotal() {
+        DOMtotal.textContent = calcularTotal();
+    }
 
            //dibujar todos los productos guardados en el carrito
            function renderizarCarrito() {
@@ -256,6 +271,7 @@
               miNodo.appendChild(miBoton);
               DOMcarrito.appendChild(miNodo);
           });
+          actualizarTotal();
          
       }
         /**
@@ -274,10 +290,21 @@
             guardarCarritoEnLocalStorage();
 
             handleCarritoValue(carrito.length)
+            actualizarTotal(); // Actualizar el total al borrar item
       }
+
+         // Evento para vaciar carrito
+         DOMbotonVaciar.addEventListener('click', () => {
+            carrito = [];
+            renderizarCarrito();
+            handleCarritoValue(0);
+            actualizarTotal(); // Actualizar el total al vaciar carrito
+        });
         renderizarProductos();
         renderizarCarrito();
         });
+
+      
 
 
         </script>
@@ -301,6 +328,7 @@
                     <button id="" class="btn btn-info">Pagar</button>
                 </aside>
             </div>
+            
         </div>
 
 
