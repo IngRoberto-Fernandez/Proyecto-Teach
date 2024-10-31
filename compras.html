@@ -132,71 +132,56 @@
                 </div>
             </div>
          <!-- CAA -->
-            <!-- productos en el carro -->
-            <script>
-                //DOM
-                document.addEventListener('DOMContentLoaded',() =>{
-                    //Variables -base de datos
-                    const baseDeDatos=[
-                        {
-                            id:1,
-                            nombre: 'Sombrero vueltiao, hecho a mano, 23 vueltas',
-                            precio: 250000,
-                            imagen: 'assets/img/feature_prod_02.jpg'
-                        },
-                        {
-                            id:3,
-                            nombre: 'Sombrero vueltiao',
-                            precio: 350000,
-                            imagen: 'assets/img/feature_prod_02.jpg'
-                        },
-                        {
-                            id:2,
-                            nombre: 'Mochilas wayuu',
-                            precio: 50000,
-                            imagen: 'assets/img/feature_prod_03.jpg'
-                        }
-                    ];
-                    let carrito = [];
-                    const divisa = '$';
-                    const DOMitems = document.querySelector('#items');
-                    const DOMcarrito = document.querySelector('#carrito');
-                    const DOMtotal = document.querySelector('#total');
-                    const DOMbotonVaciar = document.querySelector('#boton-vaciar');
-                
-
-                //seccion de funciones 
-                /*
-                Dibujamos todos los productos a partir de la base de datos
-                */
-               function renderizarProductos(){
-                baseDeDatos.forEach((info) =>{
-                    //estructura
+         document.addEventListener('DOMContentLoaded', () => {
+            //Variables -base de datos
+            const baseDeDatos = [
+                {
+                    id: 1,
+                    nombre: 'Sombrero vueltiao, hecho a mano, 23 vueltas',
+                    precio: 250000,
+                    imagen: 'assets/img/feature_prod_02.jpg'
+                },
+                {
+                    id: 3,
+                    nombre: 'Sombrero vueltiao',
+                    precio: 350000,
+                    imagen: 'assets/img/feature_prod_02.jpg'
+                },
+                {
+                    id: 2,
+                    nombre: 'Mochilas wayuu',
+                    precio: 50000,
+                    imagen: 'assets/img/feature_prod_03.jpg'
+                }
+            ];
+            let carrito = [];
+            const divisa = '$';
+            const DOMitems = document.querySelector('#items');
+            const DOMcarrito = document.querySelector('#carrito');
+            const DOMtotal = document.querySelector('#total');
+            const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+        
+            function renderizarProductos() {
+                baseDeDatos.forEach((info) => {
                     const miNodo = document.createElement('div');
-                    miNodo.classList.add('card','col-sm-4');
-                    //body
+                    miNodo.classList.add('card', 'col-sm-4');
                     const miNodoCardBody = document.createElement('div');
                     miNodoCardBody.classList.add('card-body');
-                    //titulo
                     const miNodoTitle = document.createElement('h6');
                     miNodoTitle.classList.add('card-tilte');
-                    miNodoTitle.textContent =info.nombre;
-                    //imagen
+                    miNodoTitle.textContent = info.nombre;
                     const miNodoImagen = document.createElement('img');
                     miNodoImagen.classList.add('img-fluid');
-                    miNodoImagen.setAttribute('src',info.imagen);
-                    //precio
+                    miNodoImagen.setAttribute('src', info.imagen);
                     const miNodoPrecio = document.createElement('p');
                     miNodoPrecio.classList.add('card-text');
-                    miNodoPrecio.textContent =  `${divisa}${info.precio}`;
-                    // Boton
+                    miNodoPrecio.textContent = `${divisa}${info.precio}`;
                     const miNodoBoton = document.createElement('button');
                     miNodoBoton.classList.add('btn', 'btn-primary');
                     miNodoBoton.textContent = 'Agregar';
                     miNodoBoton.setAttribute('marcador', info.id);
                     miNodoBoton.addEventListener('click', anadirProductoAlCarrito);
-
-                    //insertamos
+        
                     miNodoCardBody.appendChild(miNodoImagen);
                     miNodoCardBody.appendChild(miNodoTitle);
                     miNodoCardBody.appendChild(miNodoPrecio);
@@ -204,112 +189,79 @@
                     miNodo.appendChild(miNodoCardBody);
                     DOMitems.appendChild(miNodo);
                 });
-               }
-               /**
-          * Evento para añadir un producto al carrito de la compra
-          */
-          function anadirProductoAlCarrito(evento) {
-              // Anyadimos el Nodo a nuestro carrito
-              carrito.push(evento.target.getAttribute('marcador'))
-              // Actualizamos el carrito
-              renderizarCarrito();
-              
-
-                handleCarritoValue(carrito.length)
-
-          }
-          function handleCarritoValue(value) {
-            const carritoContainer = document.getElementById("carrito-value");
-            carritoContainer.textContent =  `${value}`
-          }
-
-               //dibujar todos los productos guardados en el carrito
-               function renderizarCarrito() {
-              // Vaciamos todo el html
-              DOMcarrito.textContent = '';
-              // Quitamos los duplicados
-              const carritoSinDuplicados = [...new Set(carrito)];
-              // Generamos los Nodos a partir de carrito
-              carritoSinDuplicados.forEach((item) => {
-                  // Obtenemos el item que necesitamos de la variable base de datos
-                  const miItem = baseDeDatos.filter((itemBaseDatos) => {
-                      // ¿Coincide las id? Solo puede existir un caso
-                      return itemBaseDatos.id === parseInt(item);
-                  });
-                  // Cuenta el número de veces que se repite el producto
-                  const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-                      // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
-                      return itemId === item ? total += 1 : total;
-                  }, 0);
-                  // Creamos el nodo del item del carrito
-                  const miNodo = document.createElement('li');
-                  miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-                  miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
-                  // Boton de borrar
-                  const miBoton = document.createElement('button');
-                  miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-                  miBoton.textContent = 'X';
-                  miBoton.style.marginLeft = '1rem';
-                  miBoton.dataset.item = item;
-                  miBoton.addEventListener('click', borrarItemCarrito);
-                  // Mezclamos nodos
-                  miNodo.appendChild(miBoton);
-                  DOMcarrito.appendChild(miNodo);
-              });
-             
-          }
-            /**
-          * Evento para borrar un elemento del carrito
-          */
-          function borrarItemCarrito(evento) {
-              // Obtenemos el producto ID que hay en el boton pulsado
-              const id = evento.target.dataset.item;
-              // Borramos todos los productos
-              carrito = carrito.filter((carritoId) => {
-                  return carritoId !== id;
-              });
-              // volvemos a renderizar
-              renderizarCarrito();
-              // Actualizamos el LocalStorage
-                guardarCarritoEnLocalStorage();
-
-                handleCarritoValue(carrito.length)
-          }
+            }
+        
+            function anadirProductoAlCarrito(evento) {
+                carrito.push(evento.target.getAttribute('marcador'))
+                renderizarCarrito();
+                calcularTotal();
+                handleCarritoValue(carrito.length);
+            }
+        
+            function handleCarritoValue(value) {
+                const carritoContainer = document.getElementById("carrito-value");
+                carritoContainer.textContent = `${value}`;
+            }
+        
+            function renderizarCarrito() {
+                DOMcarrito.textContent = '';
+                const carritoSinDuplicados = [...new Set(carrito)];
+                carritoSinDuplicados.forEach((item) => {
+                    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                        return itemBaseDatos.id === parseInt(item);
+                    });
+                    const numeroUnidadesItem = carrito.reduce((total, itemId) => {
+                        return itemId === item ? total += 1 : total;
+                    }, 0);
+                    const miNodo = document.createElement('li');
+                    miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+                    miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${divisa}${miItem[0].precio}`;
+                    const miBoton = document.createElement('button');
+                    miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+                    miBoton.textContent = 'X';
+                    miBoton.style.marginLeft = '1rem';
+                    miBoton.dataset.item = item;
+                    miBoton.addEventListener('click', borrarItemCarrito);
+                    miNodo.appendChild(miBoton);
+                    DOMcarrito.appendChild(miNodo);
+                });
+                calcularTotal();
+            }
+        
+            function borrarItemCarrito(evento) {
+                const id = evento.target.dataset.item;
+                carrito = carrito.filter((carritoId) => {
+                    return carritoId !== id;
+                });
+                renderizarCarrito();
+                calcularTotal();
+                handleCarritoValue(carrito.length);
+            }
+        
+            // Nueva función para calcular el total
+            function calcularTotal() {
+                let total = 0;
+                carrito.forEach((item) => {
+                    const miItem = baseDeDatos.filter((itemBaseDatos) => {
+                        return itemBaseDatos.id === parseInt(item);
+                    });
+                    total += miItem[0].precio;
+                });
+                DOMtotal.textContent = total.toLocaleString();
+            }
+        
+            // Evento para vaciar el carrito
+            DOMbotonVaciar.addEventListener('click', () => {
+                carrito = [];
+                renderizarCarrito();
+                calcularTotal();
+                handleCarritoValue(0);
+            });
+        
             renderizarProductos();
             renderizarCarrito();
-            });
-
-
-            </script>
-
-
-            <!-- fin de productos -->
-             <!-- carrito -->
-             <div class="container">
-                <div class="row">
-                    <!-- Elementos generados a partir del JSON -->
-                    <main id="items" class="col-sm-8 row"></main>
-                    <!-- Carrito -->
-                    <aside class="col-sm-4">
-                        <h3>Carrito</h3>
-                        <!-- Elementos del carrito -->
-                        <ul id="carrito" class="list-group"></ul>
-                        <hr>
-                        <!-- Precio total -->
-                        <p class="text-right">Total: $ <span id="total"></span></p>
-                        <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
-                        <button id="" class="btn btn-info">Pagar</button>
-                    </aside>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-<!-- final de contenido -->
-
-
+            calcularTotal();
+        });
           <!-- car -->
         <!-- inicio de pie-->
     <footer class="bg-dark" id="templatemo_footer">
