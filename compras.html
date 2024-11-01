@@ -65,7 +65,91 @@
     
          </nav>
     <!-- fin menu-->
+      <script>
+       document.addEventListener('DOMContenLoaded', ()=>{
+       //variables de la base de datos
+         const baseDeDatos=[
+               {
+                id:1,
+                nombre:'Sombrero vueltiao, hecho a mano',
+                precio:250.000,
+                imagen:'assets/img/feature_prod_01.jpg'
+               },
+               {
+                id:2,
+                nombre:'Sombrero vueltiao',
+                precio:350.000,
+                imagen:'assets/img/feature_prod_02.jpg'
+               },
+               {
+                id:3,
+                nombre:'Mochila Wayuu',
+                precio:50.000,
+                imagen:'assets/img/feature_prod_03.jpg'
+               }
 
+         ];
+       
+         let carrito=[];
+         const divisa='$';
+         const DOMitems=document.querySelector('#items');
+         const DOMcarrito=document.querySelector('#carrito');
+         const DOMtotal=document.querySelector('#total');
+         const DOMbotonVaciar=document.querySelector('#boton-vaciar');
+
+         function renderizarProductos(){
+            baseDeDatos.forEach((info) =>{
+              //estructura
+              const miNodo=document.createElement('div');
+              miNodo.classList.add('card','col-sm-4');
+              //body
+              const miNodoCarBody= document.createElement('div'); 
+              miNodoCarBody.classList.add('card-body');
+              //titulo
+              const miNodoTitle=document.createElement('h6');
+              miNodoTitle.classList.add('card-title');
+              miNodoTitle.textContent=info.nombre;
+              //imagen
+              const miNodoImagen=document.createElement('img');
+              miNodoImagen.classList.add('img-fluid');
+              miNodoImagen.setAttribute('src',info.imagen);
+              //precio
+              const miNodoPrecio=document.createElement('p');
+              miNodoPrecio.classList.add('çart-text');
+              miNodoPrecio.textContent= `${divisa} ${info.precio}`;
+              //boton
+              const miNodoBoton=document.createElement('button');
+              miNodoBoton.classList.add('btn','btn-primary');
+              miNodoBoton.textContent='Agregar';
+              miNodoBoton.setAttribute('marcador', info.id);
+              miNodoBoton.addEventListener('click',anadirProductoAlCarrito);
+
+              //insertamos
+              miNodoCarBody.appendChild(miNodoImagen);
+              miNodoCarBody.appendChild(miNodoTitle);
+              miNodoCarBody.appendChild(miNodoPrecio);
+              miNodoCarBody.appendChild(miNodoBoton);
+              miNodo.appendChild(miNodoCarBody);
+              DOMitems.appendChild(miNodo);
+            })
+         }
+         /* añadimos al carrito de compras */
+
+         function anadirProductoAlCarrito(evento){
+            carrito.push(evento.target.getAttribute('marcador'));
+            renderizarProductos();
+
+            handleCarritoValue(carrito.length)
+         }
+         function handleCarritoValue(value){
+            const carritoContainer=document.getElementById("carrito-value");
+        carritoContainer.textContent=`${value}`;
+         }
+         
+
+       })
+
+      </script>
         
          
 
