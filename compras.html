@@ -34,37 +34,165 @@
         </nav>
         <!-- fin encabezado-->
         <!-- inicio menu-->
-         <nav class="navbar navbar-expand-lg navbar-light shadow">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#opciones">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <nav class="navbar navbar-expand-lg navbar-light shadow">
             <div class="container d-flex justify-content-between align-items-center">
+    
                 <a class="navbar-brand text-success logo h1 align-self-center" href="index.html">
                     ProdArt
                 </a>
-                <div class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between" id="opciones">
-                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="acercade.html">A cerca de</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="compras.html">Compras</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="productos.html">Productos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contacto.html">Contacto</a>
-                        </li>
+    
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                    <div class="flex-fill">
+                        <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="acercade.html">A cerca de</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="compras.html">Compras</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="productos.html">Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contacto.html">Contacto</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="navbar align-self-center d-flex">
+                        <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="inputMobileSearch" placeholder="Buscar ...">
+                                <div class="input-group-text">
+                                    <i class="fa fa-fw fa-search"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                            <i class="fa fa-fw fa-search text-dark mr-2"></i>
+                        </a>
+                        <a class="nav-icon position-relative text-decoration-none" href="#">
+                            <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                            <span id="carrito-value" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        </a>
+                        <a class="nav-icon position-relative text-decoration-none" href="#">
+                            <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                            <span id="contador" class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
+                        </a>
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    <!-- fin menu-->
+
+<!-- inicio de contenido -->
+<div class="container py-5">
+    <div class="row">
+
+        <div class="col-lg-3">
+            <h1 class="h2 pb-4">Categorias</h1>
+            <ul class="list-unstyled templatemo-accordion">
+                <li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Genero
+                        <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul class="collapse show list-unstyled pl-3">
+                        <li><a class="text-decoration-none" href="#">Hombres</a></li>
+                        <li><a class="text-decoration-none" href="#">Mujeres</a></li>
                     </ul>
+                </li>
+                <li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Ventas
+                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul id="collapseTwo" class="collapse list-unstyled pl-3">
+                        <li><a class="text-decoration-none" href="#">Sombreros</a></li>
+                        <li><a class="text-decoration-none" href="#">Hamacas</a></li>
+                    </ul>
+                </li>
+                <li class="pb-3">
+                    <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
+                        Productos
+                        <i class="pull-right fa fa-fw fa-chevron-circle-down mt-1"></i>
+                    </a>
+                    <ul id="collapseThree" class="collapse list-unstyled pl-3">
+                        <li><a class="text-decoration-none" href="#">Bolsos</a></li>
+                        <li><a class="text-decoration-none" href="#">Decoración</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="row">
+
+                <div class="col-md-6 pb-4">
+                    <div class="d-flex">
+                        <select id="filtro" class="form-control">
+                            <option value="todas">Todas</option>
+                            <option value="sombreros">Sombreros</option>
+                            <option value="mochilas">Mochilas</option>
+                            <option value="bolsos">Bolsos</option>
+                            <option value="hamacas">Hamacas</option>
+                            
+                        </select>
+                    </div>
                 </div>
             </div>
-    
-         </nav>
-    <!-- fin menu-->
+            <!-- productos en el carro -->
+            <!-- fin de productos -->
+             <!-- carrito -->
+             <div class="container">
+                <div class="row">
+                    <!-- Elementos generados a partir del JSON -->
+                    <main id="items" class="col-sm-8 row"></main>
+                    <!-- Carrito -->
+                    <aside class="col-sm-4">
+                        <h3>Carrito</h3>
+                        <!-- Elementos del carrito -->
+                        <ul id="carrito" class="list-group"></ul>
+                        <hr>
+                        <!-- Precio total -->
+                        <p class="text-right">Total: $ <span id="total"></span></p>
+                        <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                        <button class="btn btn-info">
+                        <a href="pago.html" target="target_blank">Pagar</a>
+                        </button>
+                        <button class="btn btn-info">
+                        <a href="https://www.paypal.com/invoice/p/#X9AMTLCL84389TKX" target="target_blank">Pagar</a>
+                        </button>
+        
+                    </aside>
+                </div>
+            </div>
+<!-- paginacion -->
+            <div class="row">
+                <ul class="pagination pagination-lg justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- final de contenido -->
    <script>
     document.addEventListener('DOMContentLoaded',() =>{
         //Variables -base de datos
