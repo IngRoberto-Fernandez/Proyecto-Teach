@@ -5,19 +5,43 @@ document.addEventListener('DOMContentLoaded',() =>{
             id:1,
             nombre: 'Sombrero vueltiao, hecho a mano, 23 vueltas',
             precio: 250000,
-            imagen: 'assets/img/feature_prod_02.jpg'
-        },
-        {
-            id:3,
-            nombre: 'Sombrero vueltiao',
-            precio: 350000,
-            imagen: 'assets/img/feature_prod_02.jpg'
+            imagen: 'assets/img/feature_prod_02.jpg',
+            categoria:'sombreros'
         },
         {
             id:2,
-            nombre: 'Mochilas wayuu',
-            precio: 50000,
-            imagen: 'assets/img/feature_prod_03.jpg'
+            nombre: 'Sombrero vueltiao 18',
+            precio: 150000,
+            imagen: 'assets/img/feature_prod_02.jpg',
+            categoria:'sombreros'
+        },
+        {
+            id:3,
+            nombre: 'Sombrero voltiao tricolor',
+            precio: 80000,
+            imagen: 'assets/img/feature_prod_03.jpg',
+             categoria:'sombreros'
+        },
+        {
+            id:4,
+            nombre: 'Mochilas wayuu azul',
+            precio: 90000,
+            imagen: 'assets/img/feature_prod_03.jpg',
+             categoria:'mochilas'
+        },
+        {
+            id:5,
+            nombre: 'Bolso en fique',
+            precio: 155000,
+            imagen: 'assets/img/feature_prod_03.jpg',
+             categoria:'bolsos'
+        },
+        {
+            id:6,
+            nombre: 'Hamaca',
+            precio: 200000,
+            imagen: 'assets/img/feature_prod_03.jpg',
+             categoria:'hamacas'
         }
     ];
     let carrito = [];
